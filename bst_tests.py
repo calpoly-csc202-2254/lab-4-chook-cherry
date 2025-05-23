@@ -17,6 +17,7 @@ bt4 : BinTree = Node(13, Node(9, Node(4, None, Node(5, None, None)), Node(11, No
 bst3 : BinarySearchTree = BinarySearchTree(bt3)
 bst4 : BinarySearchTree = BinarySearchTree(bt4)
 bst5 : BinarySearchTree = BinarySearchTree(Node(31, None, None))
+bst6 : BinarySearchTree = BinarySearchTree(Node(15, Node(9, Node(4, None, None), Node(11, None, None)), Node(20, None, Node(25, None, None))))
 
 class BSTTests(unittest.TestCase):
     def test_is_empty(self):
@@ -33,6 +34,12 @@ class BSTTests(unittest.TestCase):
         self.assertEqual(True, lookup(bst4, 13))
         self.assertEqual(False, lookup(bst2, 7))
         self.assertEqual(False, lookup(bst2, 9))
+ 
+    def test_delete(self):
+        self.assertEqual(bst3, delete(bst4, 5))
+        self.assertEqual(bst2, delete(bst5, 31))
+        self.assertEqual(bst6, delete(bst3, 13))
+        self.assertEqual(bst3, delete(bst3, 31))
 
 
 if (__name__ == '__main__'):
