@@ -42,14 +42,29 @@ def is_empty(bst : BinarySearchTree) -> bool:
 
 def insert(bst: BinarySearchTree, x: Any) -> BinarySearchTree:
     def insert_node(node: Optional[Node], x: Any) -> Node:
-        if node is None:
-            return Node(x, None, None)
-        if bst.comes_before(x, node.val):
-            return Node(node.val, insert_node(node.left, x), node.right)
-        else:
-            return Node(node.val, node.left, insert_node(node.right, x))
+        match node:
+            case None:
+                return Node(x, None, None)
+            case Node(val, left, right):
+                if bst.comes_before(x, val):
+                    return Node(val, insert_node(left, x), right)
+                else:
+                    return Node(val, left, insert_node(right, x))
 
     return BinarySearchTree(insert_node(bst.tree, x))
+
+
+def lookup(bst: BinarySearchTree, x: Any) -> bool:
+    match bst.tree:
+        case None:
+            return False
+        case Node(val, left, right):
+            if bst.comes_before(x, val):
+                return lookup(BinarySearchTree(left), x)
+            elif bst.comes_before(val, x):
+                return lookup(BinarySearchTree(right), x)
+            else:
+                return True
 
             
 

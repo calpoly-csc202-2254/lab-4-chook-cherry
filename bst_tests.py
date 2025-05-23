@@ -27,5 +27,13 @@ class BSTTests(unittest.TestCase):
         self.assertEqual(bst4, insert(bst3, 5))
         self.assertEqual(bst5, insert(bst2, 31))
 
+    def test_lookup(self):
+        self.assertEqual(True, lookup(bst3, 20))
+        self.assertEqual(False, lookup(bst3, 7))
+        self.assertEqual(True, lookup(bst4, 13))
+        self.assertEqual(False, lookup(bst2, 7))
+        self.assertEqual(False, lookup(bst2, 9))
+
+
 if (__name__ == '__main__'):
     unittest.main()
